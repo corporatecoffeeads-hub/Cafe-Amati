@@ -49,7 +49,7 @@ src/
 
 ## Supuestos (información que el PDF no define)
 
-- **Contacto**: WhatsApp +56 9 9325 5510, configurable en `src/data/site.js`. El formulario envía la solicitud completa por WhatsApp.
+- **Contacto**: WhatsApp +56 9 3701 7893, configurable en `src/data/site.js`. El formulario envía la solicitud completa por WhatsApp.
 - **Compra mínima**: el PDF dice «Desde 5 kg»; se muestra como «5 kg en total», según el requerimiento.
 - **Niveles**: intensidad, tueste y acidez se leyeron de los íconos del PDF (1 a 3). Los nombres de nivel (suave/media/alta, etc.) son la escala del recomendador.
 - **Bolsas del simulador**: el PDF no trae bolsas lisas, por lo que se crearon como recursos originales. El resultado es referencial.
