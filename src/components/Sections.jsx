@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CLASSICS, FLAVORED, FLAVORED_TAGLINE, ATTRIBUTES, PRICES, CONDITIONS, BEAN, REASONS, STEPS } from '../data/catalog.js';
+import { CLASSICS, FLAVORED, FLAVORED_TAGLINE, CLASSIC_TAGLINE, ATTRIBUTES, PRICES, CONDITIONS, BEAN, REASONS, STEPS } from '../data/catalog.js';
 import { CONTACT, waLink } from '../data/site.js';
 import { LevelMeter, Price } from './ui.jsx';
 import heroBeans from '../assets/photos/hero-beans.webp';
@@ -128,7 +128,8 @@ function ClassicCard({ p }) {
         <img src={p.image} alt={`Bolsa de café Amati ${p.name}`} loading="lazy" className="bag-img relative mb-6 h-[78%] w-auto object-contain" />
       </div>
       <h4 className="mt-5 font-display text-[1.7rem] font-medium leading-none text-grano">{p.name}</h4>
-      <div className="mt-4 space-y-2">
+      <p className="mt-2 text-[13px] text-grano/65">100% Arábica</p>
+      <div className="mt-3 space-y-2">
         {ATTRIBUTES.map((a) => (
           <LevelMeter key={a.key} label={a.label} level={p.attrs[a.key]} levelName={a.levels[p.attrs[a.key] - 1]} />
         ))}
@@ -181,7 +182,10 @@ export function Explore() {
 
         <div className="mt-16">
           <div className="flex flex-wrap items-end justify-between gap-4 border-b border-grano/15 pb-5">
-            <h3 className="font-display text-3xl font-medium text-grano">Clásicos</h3>
+            <div>
+              <h3 className="font-display text-3xl font-medium text-grano">Clásicos</h3>
+              <p className="mt-1 text-sm text-grano/65">{CLASSIC_TAGLINE}</p>
+            </div>
             <Price amount={PRICES.clasico} />
           </div>
           <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-3 lg:grid-cols-5">
@@ -218,7 +222,7 @@ export function Explore() {
             <p className="mt-5 max-w-md font-display text-2xl leading-snug text-grano">{BEAN.profile}</p>
             <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-grano/15 pt-6">
               <div>
-                <dt className="text-xs text-grano/60">Puntaje</dt>
+                <dt className="text-xs text-grano/60">Puntaje SCA</dt>
                 <dd className="font-display text-3xl text-grano">{BEAN.score}</dd>
               </div>
               <div>
@@ -247,12 +251,19 @@ export function WhyUs() {
           </h2>
           <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-grano/70">Del café verde a tu bodega: controlamos cada etapa para que nunca te falte.</p>
           <ul className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-            {REASONS.map((r) => (
-              <li key={r.title} className="border-t border-grano/20 pt-4">
-                <h3 className="font-display text-2xl font-medium leading-tight text-grano">{r.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-grano/70">{r.text}</p>
-              </li>
-            ))}
+            {REASONS.map((r) =>
+              r.featured ? (
+                <li key={r.title} className="rounded-2xl bg-espresso px-6 py-5 text-crema sm:col-span-2">
+                  <h3 className="font-display text-3xl font-medium leading-tight">{r.title}</h3>
+                  <p className="mt-1 text-[15px] text-arena/85">{r.text}</p>
+                </li>
+              ) : (
+                <li key={r.title} className="border-t border-grano/20 pt-4">
+                  <h3 className="font-display text-2xl font-medium leading-tight text-grano">{r.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-grano/70">{r.text}</p>
+                </li>
+              ),
+            )}
           </ul>
         </div>
       </div>
@@ -300,7 +311,6 @@ export function HowToBuy() {
 
 export function Footer() {
   const contacts = [
-    CONTACT.email && { label: CONTACT.email, href: `mailto:${CONTACT.email}` },
     CONTACT.phone && { label: CONTACT.phone, href: `tel:${CONTACT.phone.replace(/\s/g, '')}` },
     CONTACT.whatsapp && { label: 'WhatsApp', href: waLink() },
     CONTACT.instagram && { label: `@${CONTACT.instagram.replace(/^@/, '')}`, href: `https://instagram.com/${CONTACT.instagram.replace(/^@/, '')}` },

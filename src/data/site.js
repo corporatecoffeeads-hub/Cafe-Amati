@@ -1,17 +1,9 @@
-// Datos de contacto (aparecen en el formulario, el botón flotante y el pie de página).
+// Datos de contacto (formulario, botón flotante y pie de página). Las solicitudes se envían por WhatsApp.
 export const CONTACT = {
-  email: 'ventas@corporatecoffee.cl',
   phone: '+56 9 9325 5510',
   whatsapp: '+56993255510',
   instagram: '', // ej.: 'cafeamati'
   website: '', // ej.: 'https://corporatecoffee.cl'
-
-  // Envío directo del formulario (opcional).
-  // Vacío: el formulario abre el correo del cliente con todo completado (no depende de terceros).
-  // Para que llegue directo a la bandeja sin abrir el correo, usa por ejemplo FormSubmit:
-  //   formEndpoint: 'https://formsubmit.co/ajax/ventas@corporatecoffee.cl',
-  // La primera vez, FormSubmit envía un correo de activación a esa casilla: hay que confirmarlo.
-  formEndpoint: 'https://formsubmit.co/ajax/ventas@corporatecoffee.cl',
 };
 
 export const waLink = (text = '') =>

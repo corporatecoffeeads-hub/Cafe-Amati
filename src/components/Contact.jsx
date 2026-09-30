@@ -79,40 +79,9 @@ export default function Contact() {
     return true;
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (!check()) return;
-    const subject = `Cotización mayorista: ${v.nombre.trim()}${v.empresa.trim() ? ` (${v.empresa.trim()})` : ''} · ${v.kg} kg`;
-    if (CONTACT.formEndpoint) {
-      setStatus({ type: 'sending', text: 'Enviando…' });
-      try {
-        const res = await fetch(CONTACT.formEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            _subject: subject,
-            _template: 'table',
-            _captcha: 'false',
-            nombre: v.nombre.trim(),
-            empresa: v.empresa.trim(),
-            telefono: v.telefono.trim(),
-            email: v.correo.trim(),
-            region: v.region,
-            volumen_kg: v.kg,
-            mensaje: v.mensaje.trim(),
-          }),
-        });
-        if (!res.ok) throw new Error();
-        setV(EMPTY);
-        setStatus({ type: 'ok', text: 'Solicitud enviada. Te contactaremos a la brevedad.' });
-      } catch {
-        setStatus({ type: 'error', text: 'No se pudo enviar. Inténtalo de nuevo o escríbenos por WhatsApp.' });
-      }
-      return;
-    }
-    const href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary(v) + '\n')}`;
-    window.location.href = href;
-    setStatus({ type: 'ok', text: `Se abrió tu aplicación de correo con la solicitud lista. Solo presiona enviar. Si no se abrió, escríbenos a ${CONTACT.email} o usa WhatsApp.` });
+    sendWhatsApp();
   };
 
   const sendWhatsApp = () => {
@@ -140,21 +109,12 @@ export default function Contact() {
                 {CONTACT.phone}
               </a>
             </div>
-            <div>
-              <p className="text-sm text-grano/60">Correo</p>
-              <a href={`mailto:${CONTACT.email}`} className="break-all font-display text-3xl text-grano hover:text-espresso">
-                {CONTACT.email}
-              </a>
-            </div>
-            <a href={waLink('Hola, tengo una consulta sobre su café.')} target="_blank" rel="noreferrer" className="btn-dark">
-              <ChatIcon size={18} />
-              Escribir por WhatsApp
-            </a>
           </div>
         </div>
 
         <form noValidate onSubmit={onSubmit} className="rounded-[22px] bg-crema p-6 shadow-[0_24px_60px_-35px_rgba(43,23,15,0.5)] sm:p-9" aria-label="Solicitud de cotización">
           <h3 className="font-display text-3xl font-medium text-grano">Solicita tu cotización</h3>
+          <p className="mt-2 text-[13px] text-grano/60">Al enviar, se abre WhatsApp con tu solicitud lista.</p>
           <div className="mt-7 grid gap-5 sm:grid-cols-2">
             <Field id="nombre" label="Nombre" error={errors.nombre}>
               <input id="nombre" className="field" autoComplete="name" maxLength={80} value={v.nombre} onChange={set('nombre')} {...inv('nombre')} />
@@ -188,10 +148,7 @@ export default function Contact() {
             </div>
           </div>
           <div className="mt-7 flex flex-wrap gap-3">
-            <button type="submit" className="btn-dark" disabled={status.type === 'sending'}>
-              {status.type === 'sending' ? 'Enviando…' : 'Enviar por correo'}
-            </button>
-            <button type="button" onClick={sendWhatsApp} className="btn-outline">
+            <button type="submit" className="btn-dark">
               <ChatIcon size={18} />
               Enviar por WhatsApp
             </button>

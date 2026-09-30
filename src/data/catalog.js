@@ -45,6 +45,7 @@ export const FLAVORED = [
 ].map((p) => ({ ...p, category: 'aromatizado', price: PRICES.aromatizado }));
 
 export const FLAVORED_TAGLINE = 'Café Amati 100% Arábica, ahora aromatizado.';
+export const CLASSIC_TAGLINE = 'Café Amati 100% Arábica.';
 
 // Lámina «Tipos de granos».
 export const BEAN = {
@@ -52,12 +53,13 @@ export const BEAN = {
   origin: 'Perú',
   regions: 'Amazonas, Cajamarca y Lambayeque',
   profile: 'Buen cuerpo, acidez media, sabores a chocolate, nueces y cítricos.',
-  score: '+81.5',
+  score: '+80.5',
   altitude: '1.200 a 2.050 msnm',
 };
 
 // Lámina «¿Por qué elegirnos como tu aliado?».
 export const REASONS = [
+  { title: 'Trazabilidad al 100%', text: 'Desde la finca a tu taza.', featured: true },
   { title: 'Importamos café verde', text: 'Traemos café verde de diferentes orígenes.' },
   { title: 'Casa de tueste propia', text: 'Tostamos en nuestra propia casa de tueste.' },
   { title: 'Tueste semanal', text: 'El café se tuesta cada semana, siempre fresco.' },

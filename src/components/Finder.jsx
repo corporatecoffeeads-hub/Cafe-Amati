@@ -117,7 +117,7 @@ export default function Finder() {
               {pref === 'clasico' ? (
                 result.winners.map((w) => (
                   <ResultCard key={w.product.id} product={w.product} match={w.match}>
-                    <p className="text-[15px] leading-relaxed text-grano/75">{explain(w.diffs)}</p>
+                    <p className="text-[15px] leading-relaxed text-grano/75">{explain(w.diffs)} 100% Arábica.</p>
                     <div className="mt-4 max-w-xs space-y-2">
                       {ATTRIBUTES.map((a) => (
                         <LevelMeter key={a.key} label={a.label} level={w.product.attrs[a.key]} levelName={a.levels[w.product.attrs[a.key] - 1]} />
