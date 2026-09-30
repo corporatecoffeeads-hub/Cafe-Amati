@@ -1,7 +1,7 @@
 // Datos de contacto (formulario, botón flotante y pie de página). Las solicitudes se envían por WhatsApp.
 export const CONTACT = {
-  phone: '+56 9 9325 5510',
-  whatsapp: '+56993255510',
+  phone: '+56 9 3701 7893',
+  whatsapp: '+56937017893',
   instagram: '', // ej.: 'cafeamati'
   website: '', // ej.: 'https://corporatecoffee.cl'
 };
