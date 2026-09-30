@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Segmented, Slider } from './ui.jsx';
+import { waLink } from '../data/site.js';
 import { renderScene, SCENE, FORMATS } from '../studio/renderBag.js';
 import {
   validateFile,
@@ -384,6 +385,23 @@ export default function BrandStudio() {
                 Descargar con fondo transparente
               </label>
               <p className="mt-3 text-xs text-arena/50">Imagen referencial. Diseño sujeto a confirmación comercial.</p>
+              <div className="mt-6 rounded-2xl border border-white/10 p-5">
+                <p className="text-sm text-crema">¿Te gustó cómo quedó?</p>
+                <p className="mt-1 text-[13px] text-arena/65">Descarga el diseño y envíanoslo para cotizar tu café con marca propia.</p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <a
+                    href={waLink(`Hola, me interesa café con marca propia. Marca: ${brand.trim() || '(por definir)'}. Bolsa ${bag} de ${formatLabel}${hasLogo ? ', con logo' : ''}.`)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-primary"
+                  >
+                    Consultar por WhatsApp
+                  </a>
+                  <a href="#contacto" className="btn-ghost-dark">
+                    Ir al formulario
+                  </a>
+                </div>
+              </div>
               {hasLogo && <p className="mt-1 hidden text-xs text-arena/40 md:block">Consejo: también puedes arrastrar el logo sobre la bolsa.</p>}
             </div>
           </div>

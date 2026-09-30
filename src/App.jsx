@@ -1,6 +1,7 @@
 import { Header, Hero, Explore, WhyUs, HowToBuy, Footer } from './components/Sections.jsx';
 import Finder from './components/Finder.jsx';
 import BrandStudio from './components/BrandStudio.jsx';
+import Contact, { WhatsAppFab } from './components/Contact.jsx';
 
 export default function App() {
   return (
@@ -8,13 +9,15 @@ export default function App() {
       <Header />
       <main id="contenido">
         <Hero />
+        <WhyUs />
         <Explore />
         <Finder />
-        <BrandStudio />
-        <WhyUs />
         <HowToBuy />
+        <BrandStudio />
+        <Contact />
       </main>
       <Footer />
+      <WhatsAppFab />
     </>
   );
 }

@@ -36,6 +36,18 @@
   .btn-light {
     @apply bg-crema text-grano hover:bg-white;
   }
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-espresso px-5 py-3 text-sm font-medium text-crema transition duration-200 hover:bg-grano disabled:cursor-wait disabled:opacity-60;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-grano/25 px-5 py-3 text-sm font-medium text-grano transition duration-200 hover:border-grano/60 hover:bg-grano/[0.04];
+  }
+  .field {
+    @apply w-full rounded-xl border border-grano/15 bg-white/70 px-4 py-3 text-[15px] text-grano placeholder:text-grano/35 focus:border-espresso focus:outline-none focus:ring-2 focus:ring-espresso/25;
+  }
+  .field[aria-invalid='true'] {
+    @apply border-red-700/60 ring-1 ring-red-700/30;
+  }
   .btn-ghost-dark {
     @apply border border-white/25 text-crema hover:border-white/60 hover:bg-white/[0.06];
   }

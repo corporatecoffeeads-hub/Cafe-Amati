@@ -2,7 +2,7 @@
 
 Catálogo mayorista interactivo (no es una tienda online) con tres módulos:
 
-1. **Explora nuestros cafés**: 5 clásicos y 5 aromatizados con empaques reales del PDF.
+1. **Nuestro café**: 5 clásicos y 5 aromatizados con empaques reales del PDF.
 2. **Encuentra tu café ideal**: recomendador por intensidad, tueste, acidez o sabor.
 3. **Crea tu marca**: simulador de bolsas personalizadas (negra/blanca, 250 g/1 kg) con logo, eliminación de fondo local y descarga en PNG de alta resolución.
 
@@ -49,7 +49,8 @@ src/
 
 ## Supuestos (información que el PDF no define)
 
-- **Contacto**: el PDF no incluye teléfono, correo ni redes. No se inventaron; complétalos en `src/data/site.js` y aparecerán en el pie de página.
+- **Contacto**: WhatsApp +56 9 9325 5510 y ventas@corporatecoffee.cl, configurables en `src/data/site.js`.
+- **Formulario**: un sitio estático no puede enviar correos por sí solo. Por defecto el formulario abre el correo del cliente con todo completado (o lo envía por WhatsApp). Para envío directo sin abrir el correo, activa `formEndpoint` en `src/data/site.js` (ver comentario en ese archivo).
 - **Compra mínima**: el PDF dice «Desde 5 kg»; se muestra como «5 kg en total», según el requerimiento.
 - **Niveles**: intensidad, tueste y acidez se leyeron de los íconos del PDF (1 a 3). Los nombres de nivel (suave/media/alta, etc.) son la escala del recomendador.
 - **Bolsas del simulador**: el PDF no trae bolsas lisas, por lo que se crearon como recursos originales. El resultado es referencial.

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CLASSICS, FLAVORED, FLAVORED_TAGLINE, ATTRIBUTES, PRICES, CONDITIONS, BEAN, REASONS, STEPS } from '../data/catalog.js';
-import { CONTACT } from '../data/site.js';
+import { CONTACT, waLink } from '../data/site.js';
 import { LevelMeter, Price } from './ui.jsx';
 import heroBeans from '../assets/photos/hero-beans.webp';
 import roasted from '../assets/photos/roasted.webp';
@@ -13,11 +13,12 @@ import amatiMark from '../assets/brand/amati-mark.webp';
 import corporateLogo from '../assets/brand/corporate-coffee.webp';
 
 const NAV = [
-  { href: '#cafes', label: 'Cafés' },
-  { href: '#tu-cafe', label: 'Tu café ideal' },
-  { href: '#crea-tu-marca', label: 'Crea tu marca' },
   { href: '#nosotros', label: 'Nosotros' },
+  { href: '#cafe', label: 'Nuestro café' },
+  { href: '#tu-cafe', label: 'Tu café ideal' },
   { href: '#como-comprar', label: 'Cómo comprar' },
+  { href: '#crea-tu-marca', label: 'Crea tu marca' },
+  { href: '#contacto', label: 'Contacto' },
 ];
 
 export function Header() {
@@ -54,7 +55,7 @@ export function Header() {
           <img src={amatiMark} alt="" width="27" height="30" className={`h-7 w-auto transition ${solid ? '' : 'invert'}`} />
           <span className={`font-display text-xl font-medium tracking-wide ${solid ? 'text-grano' : 'text-crema'}`}>Amati</span>
         </a>
-        <ul className="hidden items-center gap-7 lg:flex">
+        <ul className="hidden items-center gap-6 lg:flex">
           {NAV.map((n) => (
             <li key={n.href}>
               <a href={n.href} className={`navlink text-[13px] ${solid ? 'text-grano/80 hover:text-grano' : 'text-crema/85 hover:text-crema'}`}>
@@ -107,8 +108,8 @@ export function Hero() {
           Café de grano tostado cada semana en nuestra propia casa de tueste. Explora las variedades, encuentra la tuya y diseña tu propia bolsa.
         </p>
         <div className="hero-in mt-9 flex flex-wrap gap-3" style={{ animationDelay: '0.42s' }}>
-          <a href="#cafes" className="btn-light">
-            Ver los cafés
+          <a href="#cafe" className="btn-light">
+            Ver nuestro café
           </a>
           <a href="#crea-tu-marca" className="btn-ghost-dark">
             Crea tu marca
@@ -155,7 +156,7 @@ function FlavoredCard({ p }) {
 
 export function Explore() {
   return (
-    <section id="cafes" className="scroll-mt-16 bg-crema" aria-labelledby="cafes-title">
+    <section id="cafe" className="scroll-mt-16 bg-crema" aria-labelledby="cafes-title">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
@@ -269,6 +270,14 @@ export function HowToBuy() {
               ¿Cómo comprar?
             </h2>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-grano/70">Simplifica tu compra y pide todo en un solo lugar.</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#contacto" className="btn-dark">
+                Solicitar cotización
+              </a>
+              <a href={waLink('Hola, quiero hacer un pedido de café.')} target="_blank" rel="noreferrer" className="btn-outline">
+                Escribir por WhatsApp
+              </a>
+            </div>
             <img src={greenBeans} alt="Café verde antes del tueste" loading="lazy" className="mt-10 hidden aspect-[4/3] w-full rounded-[22px] object-cover lg:block" />
           </div>
           <ol className="relative">
@@ -293,7 +302,7 @@ export function Footer() {
   const contacts = [
     CONTACT.email && { label: CONTACT.email, href: `mailto:${CONTACT.email}` },
     CONTACT.phone && { label: CONTACT.phone, href: `tel:${CONTACT.phone.replace(/\s/g, '')}` },
-    CONTACT.whatsapp && { label: 'WhatsApp', href: `https://wa.me/${CONTACT.whatsapp.replace(/\D/g, '')}` },
+    CONTACT.whatsapp && { label: 'WhatsApp', href: waLink() },
     CONTACT.instagram && { label: `@${CONTACT.instagram.replace(/^@/, '')}`, href: `https://instagram.com/${CONTACT.instagram.replace(/^@/, '')}` },
     CONTACT.website && { label: CONTACT.website.replace(/^https?:\/\//, ''), href: CONTACT.website },
   ].filter(Boolean);
