@@ -334,7 +334,7 @@ export default function BrandStudio() {
             Crea tu marca
           </h2>
           <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-arena/80">
-            Pon tu nombre y tu logo en nuestras bolsas y mira cómo quedaría tu propio café. Elige color y formato; la vista previa se actualiza al instante.
+            Pon tu nombre y tu logo en nuestras bolsas y mira cómo quedaría tu propio café. Elige color y formato; la vista previa se actualiza al instante. Pedido minimo 10 kg.
           </p>
         </div>
 
