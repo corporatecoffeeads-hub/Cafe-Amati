@@ -330,11 +330,16 @@ export default function BrandStudio() {
     <section id="crea-tu-marca" className="relative scroll-mt-16 bg-grano text-crema" aria-labelledby="studio-title">
       <div className="mx-auto max-w-7xl px-5 pb-20 pt-20 sm:px-8 lg:pb-28 lg:pt-28">
         <div className="max-w-2xl">
-          <h2 id="studio-title" className="font-display text-[2.6rem] font-medium leading-[1.02] sm:text-6xl">
-            Crea tu marca
-          </h2>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+            <h2 id="studio-title" className="font-display text-[2.6rem] font-medium leading-[1.02] sm:text-6xl">
+              Crea tu marca
+            </h2>
+            <span className="inline-flex items-center rounded-full border border-arena/35 px-3.5 py-1.5 text-[13px] text-arena/85 sm:mt-2">
+              Pedido mínimo 10 kg.
+            </span>
+          </div>
           <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-arena/80">
-            Pon tu nombre y tu logo en nuestras bolsas y mira cómo quedaría tu propio café. Elige color y formato; la vista previa se actualiza al instante. Pedido minimo 10 kg.
+            Pon tu nombre y tu logo en nuestras bolsas y mira cómo quedaría tu propio café. Elige color y formato; la vista previa se actualiza al instante.
           </p>
         </div>
 
