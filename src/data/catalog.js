@@ -51,7 +51,6 @@ export const CLASSIC_TAGLINE = 'Café Amati 100% Arábica.';
 export const BEAN = {
   species: 'Arábica',
   origin: 'Perú',
-  regions: 'Amazonas, Cajamarca y Lambayeque',
   profile: 'Buen cuerpo, acidez media, sabores a chocolate, nueces y cítricos.',
   score: '+80.5',
   altitude: '1.200 a 2.050 msnm',

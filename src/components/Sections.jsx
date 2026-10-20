@@ -217,7 +217,7 @@ export function Explore() {
             <img src={beanA} alt="" aria-hidden="true" className="pointer-events-none absolute -right-8 -top-8 w-28 rotate-12 opacity-90" loading="lazy" />
             <h3 className="font-display text-4xl font-medium text-grano">Nuestro grano</h3>
             <p className="mt-2 text-grano/70">
-              {BEAN.species} de {BEAN.origin}, regiones de {BEAN.regions}.
+              {BEAN.species} de {BEAN.origin}.
             </p>
             <p className="mt-5 max-w-md font-display text-2xl leading-snug text-grano">{BEAN.profile}</p>
             <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-grano/15 pt-6">
