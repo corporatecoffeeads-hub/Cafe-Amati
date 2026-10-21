@@ -317,7 +317,7 @@ export function Footer() {
     CONTACT.website && { label: CONTACT.website.replace(/^https?:\/\//, ''), href: CONTACT.website },
   ].filter(Boolean);
   return (
-    <footer className="bg-tinta text-arena/70">
+    <footer className="bg-tinta text-arena/70" data-wa="pie_de_pagina">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-5 py-14 sm:px-8 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-8">
           <img src={corporateLogo} alt="Corporate Coffee" width="120" height="91" className="h-16 w-auto invert" loading="lazy" />

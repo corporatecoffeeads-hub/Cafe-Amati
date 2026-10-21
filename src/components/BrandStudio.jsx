@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Segmented, Slider } from './ui.jsx';
 import { waLink } from '../data/site.js';
+import { track } from '../analytics.js';
 import { renderScene, SCENE, FORMATS } from '../studio/renderBag.js';
 import {
   validateFile,
@@ -252,6 +253,7 @@ export default function BrandStudio() {
 
   const download = () => {
     if (!fontsReady) return;
+    track('descarga_diseno', { bolsa: bag, formato: FORMATS[format].label, con_logo: !!logoCanvas });
     setDownloading(true);
     setTimeout(() => {
       try {

@@ -56,3 +56,11 @@ src/
 - **Aromatizados**: solo se indica su aroma y que son 100 % Arábica, tal como dice el PDF; no se atribuyen otras características.
 - **Imágenes de producto**: son las del PDF, cuya resolución es baja (unos 125 × 207 px, salvo Vulcano). Para mayor nitidez, reemplaza los archivos de `src/assets/bags/` por versiones en alta resolución con el mismo nombre.
 - **Solubles**: se mencionan en «¿Por qué elegirnos?» porque el PDF los nombra, pero no se muestran productos porque el PDF no los detalla.
+
+## Medición (Google Analytics 4)
+
+- ID de medición: `G-EXC6WYRTKM`, en `index.html`. Para cambiarlo, reemplázalo en las dos apariciones.
+- Visitas: se registran automáticamente.
+- Evento `click_whatsapp` con el parámetro `ubicacion` (boton_flotante, contacto, formulario, como-comprar, crea-tu-marca, pie_de_pagina).
+- Catálogo: evento `descarga_diseno` en «Crea tu marca». Brochure: evento `descarga_pdf`.
+- Lógica en `src/analytics.js`.

@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Cormorant Garamond";font-weight:600;src:url(node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2)}
+@font-face{font-family:"Cormorant Garamond";font-weight:500;src:url(node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:500;src:url(node_modules/@fontsource/montserrat/files/montserrat-latin-500-normal.woff2)}
+</style></head><body>
+<script type="module">
+import { renderScene } from './src/studio/renderBag.js';
+await Promise.all(['600 40px "Cormorant Garamond"','500 20px Montserrat'].map(f=>document.fonts.load(f)));
+const c=document.createElement('canvas');
+renderScene(c,{bag:'negra',format:'1000',brand:'Simil Lavaza',logo:null,controls:{},transparent:true},2);
+window.__png=c.toDataURL('image/png');
+</script></body></html>
