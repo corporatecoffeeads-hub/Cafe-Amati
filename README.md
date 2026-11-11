@@ -64,3 +64,10 @@ src/
 - Evento `click_whatsapp` con el parámetro `ubicacion` (boton_flotante, contacto, formulario, como-comprar, crea-tu-marca, pie_de_pagina).
 - Catálogo: evento `descarga_diseno` en «Crea tu marca». Brochure: evento `descarga_pdf`.
 - Lógica en `src/analytics.js`.
+
+## Pedido por WhatsApp
+
+- Botón «Quiero hacer mi pedido» en la portada y después de las variedades; ambos abren el mismo formulario (`src/components/Order.jsx`).
+- Cada producto: variedad (10), formato (250 g / 1 kg), presentación (grano entero / molido) y cantidad en bolsas (enteros positivos).
+- Total kg = Σ (bolsas × peso del formato). «Enviar solicitud» se habilita desde 5 kg y todos los productos completos.
+- Envía el detalle por WhatsApp (+56 9 3701 7893) sin precios. Eventos de Analytics: `abrir_pedido`, `enviar_pedido` y `click_whatsapp` (ubicacion: pedido).

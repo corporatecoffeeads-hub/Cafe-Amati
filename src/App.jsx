@@ -2,6 +2,7 @@ import { Header, Hero, Explore, WhyUs, HowToBuy, Footer } from './components/Sec
 import Finder from './components/Finder.jsx';
 import BrandStudio from './components/BrandStudio.jsx';
 import Contact, { WhatsAppFab } from './components/Contact.jsx';
+import OrderDialog from './components/Order.jsx';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppFab />
+      <OrderDialog />
     </>
   );
 }

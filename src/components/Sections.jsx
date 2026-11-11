@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { CLASSICS, FLAVORED, FLAVORED_TAGLINE, CLASSIC_TAGLINE, ATTRIBUTES, PRICES, CONDITIONS, BEAN, REASONS, STEPS } from '../data/catalog.js';
 import { CONTACT, waLink } from '../data/site.js';
 import { LevelMeter, Price } from './ui.jsx';
+import { OrderButton } from './Order.jsx';
 import heroBeans from '../assets/photos/hero-beans.webp';
 import roasted from '../assets/photos/roasted.webp';
 import hands from '../assets/photos/hands.webp';
@@ -107,8 +108,11 @@ export function Hero() {
         <p className="hero-in mt-7 max-w-lg text-[15px] leading-relaxed text-arena/85" style={{ animationDelay: '0.3s' }}>
           Café de grano tostado cada semana en nuestra propia casa de tueste. Explora las variedades, encuentra la tuya y diseña tu propia bolsa.
         </p>
-        <div className="hero-in mt-9 flex flex-wrap gap-3" style={{ animationDelay: '0.42s' }}>
-          <a href="#cafe" className="btn-light">
+        <div className="hero-in mt-9" style={{ animationDelay: '0.4s' }}>
+          <OrderButton source="inicio" tone="light" />
+        </div>
+        <div className="hero-in mt-4 flex flex-wrap gap-3" style={{ animationDelay: '0.48s' }}>
+          <a href="#cafe" className="btn-ghost-dark">
             Ver nuestro café
           </a>
           <a href="#crea-tu-marca" className="btn-ghost-dark">
@@ -208,6 +212,12 @@ export function Explore() {
               <FlavoredCard key={p.id} p={p} />
             ))}
           </div>
+        </div>
+
+        <div className="mt-20 flex flex-col items-center gap-5 rounded-[22px] bg-grano px-6 py-12 text-center text-crema sm:py-14">
+          <h3 className="font-display text-[2.2rem] font-medium leading-tight sm:text-5xl">¿Listo para pedir?</h3>
+          <p className="max-w-md text-[15px] leading-relaxed text-arena/80">Elige variedades, formato y presentación, y envíanos tu solicitud de cotización por WhatsApp. Pedido mínimo 5 kg en total.</p>
+          <OrderButton source="variedades" tone="light" />
         </div>
 
         {/* Lámina «Tipos de granos» */}

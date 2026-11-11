@@ -48,6 +48,68 @@
   .field[aria-invalid='true'] {
     @apply border-red-700/60 ring-1 ring-red-700/30;
   }
+  .order-cta {
+    @apply inline-flex w-full items-center justify-center gap-3 whitespace-nowrap rounded-full px-6 py-[1.15rem] text-[14px] font-medium uppercase tracking-[0.08em] transition duration-300 sm:w-auto sm:px-9 sm:text-[15px] sm:tracking-[0.14em];
+    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+  .order-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 46px -18px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  }
+  .order-cta-light {
+    background: linear-gradient(135deg, #f7e6d3 0%, #e6c7a6 100%);
+    color: #2b170f;
+  }
+  .order-cta-dark {
+    background: linear-gradient(135deg, #5a2f1f 0%, #2b170f 100%);
+    color: #fbf5ee;
+  }
+  .order-send {
+    @apply inline-flex shrink-0 items-center justify-center rounded-full bg-espresso px-6 py-3.5 text-sm font-medium uppercase tracking-[0.1em] text-crema transition hover:bg-grano;
+  }
+  .order-send[aria-disabled='true'] {
+    @apply cursor-not-allowed bg-grano/20 text-grano/50 hover:bg-grano/20;
+  }
+  .order-dialog {
+    margin: auto;
+    padding: 0;
+    border: 0;
+    width: min(760px, calc(100% - 2rem));
+    max-height: min(92vh, 900px);
+    height: fit-content;
+    border-radius: 24px;
+    background: #fbf5ee;
+    color: #2b170f;
+    box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+  }
+  .order-dialog[open] {
+    display: flex;
+    flex-direction: column;
+    animation: rise 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .order-dialog > div {
+    max-height: min(92vh, 900px);
+  }
+  .order-dialog::backdrop {
+    background: rgba(20, 10, 6, 0.6);
+    backdrop-filter: blur(3px);
+  }
+  @media (max-width: 639px) {
+    .order-dialog {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      max-height: 100%;
+      height: 100dvh;
+      max-height: 100dvh;
+      border-radius: 0;
+    }
+    .order-dialog > div {
+      max-height: 100%;
+      height: 100%;
+    }
+  }
   .btn-ghost-dark {
     @apply border border-white/25 text-crema hover:border-white/60 hover:bg-white/[0.06];
   }
@@ -191,5 +253,17 @@
   .ideal-glow {
     animation: none;
     box-shadow: 0 0 22px 2px rgba(201, 162, 122, 0.5);
+  }
+}
+
+html.modal-open {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .order-dialog[open] {
+    animation: none;
+  }
+  .order-cta:hover {
+    transform: none;
   }
 }
