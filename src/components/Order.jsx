@@ -293,32 +293,49 @@ export default function OrderDialog() {
               <h3 id="recipient-title" className="font-display text-2xl font-medium text-grano sm:text-3xl">
                 ¿A quién le envías tu solicitud?
               </h3>
-              <p className="mt-1.5 text-[13px] text-grano/65">Si eres cliente nuevo, escríbenos a Atención al cliente. Si ya tienes ejecutivo, elígelo directamente.</p>
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-                {ORDER_RECIPIENTS.map((r) => (
-                  <li key={r.id} className={r.id === 'atencion' ? 'sm:col-span-2' : ''}>
-                    <a
-                      href={waLink(message, r.phone)}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={() => track('enviar_pedido', { total_kg: total, productos: items.length, destinatario: r.id })}
-                      className={`recipient group ${r.id === 'atencion' ? 'recipient-main' : ''}`}
-                    >
+              <p className="mt-1.5 text-[13px] text-grano/65">Si es tu primer pedido, envíalo a Atención al cliente.</p>
+              {(() => {
+                const [main, ...execs] = ORDER_RECIPIENTS;
+                const send = (r) => track('enviar_pedido', { total_kg: total, productos: items.length, destinatario: r.id });
+                return (
+                  <>
+                    <a href={waLink(message, main.phone)} target="_blank" rel="noreferrer" onClick={() => send(main)} className="recipient recipient-main group mt-5">
                       <span className="recipient-emoji" aria-hidden="true">
-                        {r.emoji}
+                        {main.emoji}
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block font-display text-[1.45rem] font-medium leading-tight">{r.name}</span>
-                        <span className="block text-[12px] opacity-70">{r.note}</span>
-                        <span className="block whitespace-nowrap text-[12px] tabular-nums opacity-70">{r.display}</span>
+                        <span className="block font-display text-[1.45rem] font-medium leading-tight sm:text-[1.7rem]">{main.name}</span>
+                        <span className="block text-[13px] text-grano/65">{main.note}</span>
+                        <span className="block whitespace-nowrap text-[13px] tabular-nums text-grano/65">{main.display}</span>
                       </span>
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="shrink-0 opacity-50 transition group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="shrink-0 opacity-50 transition group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true">
                         <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </a>
-                  </li>
-                ))}
-              </ul>
+                    <h4 className="mt-7 text-sm font-medium text-grano">¿Ya tienes un ejecutivo?</h4>
+                    <ul className="mt-2.5 grid grid-cols-4 gap-2 sm:gap-3">
+                      {execs.map((r) => (
+                        <li key={r.id}>
+                          <a
+                            href={waLink(message, r.phone)}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={() => send(r)}
+                            className="recipient-exec"
+                            aria-label={`Enviar a ${r.name}, ${r.note.toLowerCase()}, ${r.display}`}
+                            title={r.display}
+                          >
+                            <span className="text-[24px] leading-none" aria-hidden="true">
+                              {r.emoji}
+                            </span>
+                            <span className="mt-1.5 block w-full truncate text-[13px] font-medium">{r.name}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                );
+              })()}
               <p className="mt-4 text-[12px] text-grano/55">Se abrirá WhatsApp con tu pedido listo para enviar.</p>
             </section>
           ) : (
