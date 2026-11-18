@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { CLASSICS, FLAVORED, CONDITIONS } from '../data/catalog.js';
-import { waLink } from '../data/site.js';
+import { waLink, ORDER_RECIPIENTS } from '../data/site.js';
 import { track } from '../analytics.js';
 
 /* ---------- datos y lógica (sin precios) ---------- */
@@ -208,6 +208,7 @@ export default function OrderDialog() {
   const listRef = useRef(null);
   const [items, setItems] = useState(() => [newItem()]);
   const [showErrors, setShowErrors] = useState(false);
+  const [step, setStep] = useState('form'); // form | recipient
   const [announce, setAnnounce] = useState('');
 
   const open = useCallback((source) => {
@@ -218,12 +219,16 @@ export default function OrderDialog() {
     track('abrir_pedido', { ubicacion: source || 'otro' });
   }, []);
   const close = useCallback(() => ref.current?.close(), []);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     const onOpen = (e) => open(e.detail?.source);
     window.addEventListener(OPEN_EVENT, onOpen);
     const d = ref.current;
-    const onClose = () => document.documentElement.classList.remove('modal-open');
+    const onClose = () => {
+      document.documentElement.classList.remove('modal-open');
+      setStep('form');
+    };
     d?.addEventListener('close', onClose);
     return () => {
       window.removeEventListener(OPEN_EVENT, onOpen);
@@ -237,7 +242,7 @@ export default function OrderDialog() {
   const missing = Math.max(0, MIN_KG - total);
   const canSend = allComplete && total >= MIN_KG;
   const progress = Math.min(100, (total / MIN_KG) * 100);
-  const href = canSend ? waLink(buildMessage(items)) : undefined;
+  const message = canSend ? buildMessage(items) : '';
 
   const update = (key, patch) => setItems((list) => list.map((it) => (it.key === key ? { ...it, ...patch } : it)));
   const remove = (key, label) => {
@@ -282,7 +287,42 @@ export default function OrderDialog() {
           </button>
         </header>
 
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7">
+        <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7">
+          {step === 'recipient' ? (
+            <section aria-labelledby="recipient-title">
+              <h3 id="recipient-title" className="font-display text-2xl font-medium text-grano sm:text-3xl">
+                ¿A quién le envías tu solicitud?
+              </h3>
+              <p className="mt-1.5 text-[13px] text-grano/65">Si eres cliente nuevo, escríbenos a Atención al cliente. Si ya tienes ejecutivo, elígelo directamente.</p>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                {ORDER_RECIPIENTS.map((r) => (
+                  <li key={r.id} className={r.id === 'atencion' ? 'sm:col-span-2' : ''}>
+                    <a
+                      href={waLink(message, r.phone)}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => track('enviar_pedido', { total_kg: total, productos: items.length, destinatario: r.id })}
+                      className={`recipient group ${r.id === 'atencion' ? 'recipient-main' : ''}`}
+                    >
+                      <span className="recipient-emoji" aria-hidden="true">
+                        {r.emoji}
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-display text-[1.45rem] font-medium leading-tight">{r.name}</span>
+                        <span className="block text-[12px] opacity-70">{r.note}</span>
+                        <span className="block whitespace-nowrap text-[12px] tabular-nums opacity-70">{r.display}</span>
+                      </span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="shrink-0 opacity-50 transition group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true">
+                        <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[12px] text-grano/55">Se abrirá WhatsApp con tu pedido listo para enviar.</p>
+            </section>
+          ) : (
+          <>
           <ol ref={listRef} className="space-y-4">
             {items.map((it, i) => (
               <ItemRow
@@ -319,6 +359,8 @@ export default function OrderDialog() {
               </ul>
             </section>
           )}
+          </>
+          )}
         </div>
 
         <footer className="border-t border-grano/10 bg-crema px-5 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-4 sm:px-7">
@@ -329,10 +371,25 @@ export default function OrderDialog() {
                 {formatKg(total)} <span className="text-2xl">kg</span>
               </p>
             </div>
-            {href ? (
-              <a href={href} target="_blank" rel="noreferrer" className="order-send" onClick={() => track('enviar_pedido', { total_kg: total, productos: items.length })}>
+            {step === 'recipient' ? (
+              <button type="button" onClick={() => setStep('form')} className="order-back">
+                ← Volver al pedido
+              </button>
+            ) : canSend ? (
+              <button
+                type="button"
+                className="order-send"
+                onClick={() => {
+                  setStep('recipient');
+                  track('elegir_destinatario', { total_kg: total });
+                  requestAnimationFrame(() => {
+                    scrollRef.current?.scrollTo({ top: 0 });
+                    scrollRef.current?.querySelector('.recipient')?.focus();
+                  });
+                }}
+              >
                 Enviar solicitud
-              </a>
+              </button>
             ) : (
               <button
                 type="button"

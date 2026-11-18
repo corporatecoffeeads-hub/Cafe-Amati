@@ -259,7 +259,7 @@ export function WhyUs() {
           <h2 id="why-title" className="font-display text-[2.6rem] font-medium leading-[1.02] text-grano sm:text-6xl">
             ¿Por qué elegirnos?
           </h2>
-          <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-grano/70">Del café verde a tu bodega: controlamos cada etapa para que nunca te falte.</p>
+          <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-grano/70">Desde la finca hasta tu taza: trazabilidad en cada etapa.</p>
           <ul className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
             {REASONS.map((r) =>
               r.featured ? (

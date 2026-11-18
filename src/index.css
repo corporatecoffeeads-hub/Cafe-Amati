@@ -70,6 +70,22 @@
   .order-send[aria-disabled='true'] {
     @apply cursor-not-allowed bg-grano/20 text-grano/50 hover:bg-grano/20;
   }
+  .order-back {
+    @apply inline-flex shrink-0 items-center justify-center rounded-full border border-grano/25 px-5 py-3.5 text-sm font-medium text-grano transition hover:border-grano/60;
+  }
+  .recipient {
+    @apply flex items-center gap-4 rounded-2xl border border-grano/10 bg-white/70 px-4 py-4 text-grano transition duration-200 hover:-translate-y-0.5 hover:border-espresso/50 hover:bg-white;
+    box-shadow: 0 10px 26px -20px rgba(43, 23, 15, 0.5);
+  }
+  .recipient-main {
+    @apply border-transparent bg-espresso text-crema hover:bg-grano;
+  }
+  .recipient-emoji {
+    @apply grid h-12 w-12 shrink-0 place-items-center rounded-full bg-arena/70 text-[26px] leading-none;
+  }
+  .recipient-main .recipient-emoji {
+    @apply bg-white/10;
+  }
   .order-dialog {
     margin: auto;
     padding: 0;

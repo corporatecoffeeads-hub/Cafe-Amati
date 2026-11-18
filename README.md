@@ -71,3 +71,4 @@ src/
 - Cada producto: variedad (10), formato (250 g / 1 kg), presentación (grano entero / molido) y cantidad en bolsas (enteros positivos).
 - Total kg = Σ (bolsas × peso del formato). «Enviar solicitud» se habilita desde 5 kg y todos los productos completos.
 - Envía el detalle por WhatsApp (+56 9 3701 7893) sin precios. Eventos de Analytics: `abrir_pedido`, `enviar_pedido` y `click_whatsapp` (ubicacion: pedido).
+- Al enviar, el cliente elige destinatario: Atención al cliente (clientes nuevos) o su ejecutivo (Fabiola, Trinimar, David, Ignacio). Números en `src/data/site.js` → `ORDER_RECIPIENTS`.
